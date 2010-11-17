@@ -1,4 +1,6 @@
 
+Now we commit this new version
+
   A short list of the most useful R commands
 
 A summary of the most important commands with minimal examples. See the
