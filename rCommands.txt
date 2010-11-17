@@ -1,5 +1,5 @@
 
-  A short list of the most useful R commands
+  A short list of the most useful R commands. To be shared with friends
 
 A summary of the most important commands with minimal examples. See the
 relevant part of the guide <r.guide.html> for better examples. For all
