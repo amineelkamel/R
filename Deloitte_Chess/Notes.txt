@@ -1,0 +1,11 @@
+
+
+- We need to create a RATING of players at the end of the training set (month 132). 
+An important variable to predict new outcomes is the last played games (to assess how strongly a player was performing). 
+
+
+PREDICTORS:
+- rating ELO number
+- results of last played games
+- plays with white (the higher on the ranking the most it counts)
+-

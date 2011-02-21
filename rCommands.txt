@@ -64,7 +64,7 @@ new=old[n1:n2,n3:n4]                      #select the n1 through n2 rows of vari
 
 
       data manipulation
-A <- matrix(1, 3, 4) 			# creates a matrix of ones
+A <- matrix(1, 3, 4) 			# creates a matrix of ones*
 rownames(A) <- c('one','two,'three')	# set rown names
 colnames(A) <- c('a','b','c','d')	# set column names				
 B <- array(1:24, c(4,2,3))		# creates an array
