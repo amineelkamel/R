@@ -70,7 +70,7 @@ detach(mat)                               #releases the names
 
 
 
-	DATA MANIPULATION
+	MATRIX DATA MANIPULATION
 
 x=c(1,2,4,8,16 )                           #create a data vector with specified elements
 y=c(1:10)                                  #creat a data vector with elements 1-10
@@ -85,7 +85,7 @@ string3 <- paste(string1, string2, sep="") #combine strings 1 & 2 into a single 
 mat[4,2]                                   #display the 4th row and the 2nd column
 mat[3,]                                    #display the 3rd row
 mat[,2]                                    #display the 2nd column
-subset(dataset,logical)                    #those objects meeting a logical criterion
+subset(dataset, v1 > 0  & v2 < 100)        #those objects meeting a logical criterion
 subset(data.df,select=variables,logical)   #get those objects from a data frame that meet a criterion 
 data.df[data.df=logical]                   #yet another way to get a subset
 x[order(x$B),]                             #sort a dataframe by the order of the elements in B
@@ -105,8 +105,8 @@ attributes(A)
 class(A)
 mode(A)
 dim(A)
-tapply
-aggregate
+tapply					# apply a function to a set of data
+aggregate				# calculate some values on a set of data. VERY USEFUL FOR SUMMARY OF DATA
 scan()
 rep(c(1,2,3), 4)
 
@@ -132,11 +132,6 @@ Ex: cut (X, quantile(X, c(0, 1/3, 2/3 , 1), include.lowest=T, labels = c('low', 
 
 recode (X , '0:10= 1, 11:20=2, else = 3') # careful with the ' & "
 
-x.df=data.frame(x1,x2,x3 ...)             #combine different kinds of data into a data frame
-	as.data.frame()
-	is.data.frame()
-x=as.matrix()
-scale()                                   #converts a data frame to standardized scores
 
 round(x,n)                                #rounds the values of x to n decimal places
 ceiling(x)                                #vector x of smallest integers > x
@@ -164,15 +159,27 @@ col.max(x)                                   	#another way to find which column 
 which.min(x)
 which.max(x)
 z=apply(big5r,1,which.min)               	#tells the row with the minimum value for every column
- 
-     FUNCTIONS
+
+
+
+	DATA FRAMES MANIPULATION
+
+x.df = data.frame(x1,x2,x3 ...)        	     #combine different kinds of data into a data frame
+	as.data.frame()
+	is.data.frame()
+x = as.matrix()
+scale()                                     #converts a data frame to standardized scores
+names(data.frame) <- cbind('one', 'two', ...) # Adds names to data frame
+str()					# See the structure and variables of a dataset		
+
+	FUNCTIONS
 
 One can create a function in an .r for later use. To load it to the workspace it is needed 
 source("myFunc.r")
 
 
-	STATISTICS AND TRANSFORMATIONS
 
+	STATISTICS AND TRANSFORMATIONS
  
 max()
 min()
@@ -189,34 +196,18 @@ cumsum(x)     		#cumulative sum, etc.
 cumprod(x)
 cummax(x)
 cummin(x)
-
-
 cor(x,y,use="pair")   	#correlation matrix for pairwise complete data, use="complete" for complete cases
+
+
+# LOGARITHMIC TRANSFORMATIONS IN CAR PACKAGE
+box.cox(vector, exp) 								# deprecated and replaced by bcPower
+Ask(p, function(p) qq.plot(box.cox(income,p), ylab='transformed income'))   	# trial and error of exponents
+logit()
+
+
+# REGRESSION AND LINEAR MODEL
  
-aov(x~y,data=datafile)  			#where x and y can be matrices
-aov.ex1 = aov(DV~IV,data=data.ex1)  		#do the analysis of variance or
-aov.ex2 = aov(DV~IV1*IV21,data=data.ex2)        #do a two way analysis of variance
-summary(aov.ex1)                                #show the summary table
-print(model.tables(aov.ex1,"means"),digits=3)   #report the means and the number of subjects/cell
-boxplot(DV~IV,data=data.ex1)        		#graphical summary appears in graphics window
-
-
 lm(x~y,data=dataset)                      	#basic linear model where x and y can be matrices  (see plot.lm for plotting options)
-t.test(x,g)
-pairwise.t.test(x,g)
-power.anova.test(groups = NULL, n = NULL, between.var = NULL,
-                 within.var = NULL, sig.level = 0.05, power = NULL)
-power.t.test(n = NULL, delta = NULL, sd = 1, sig.level = 0.05,
-             power = NULL, type = c("two.sample", "one.sample", "paired"),
-             alternative = c("two.sided", "one.sided"),strict = FALSE)           
-
- 
-
-
-      MORE STATISTICS: REGRESSION AND LINEAR MODEL
-
- 
-lm(Y~X)                                  #Y and X can be matrices
 lm(Y~X1+X2)
 lm(Y~X|W)                              
 solve(A,B)                               #inverse of A * B   - used for linear regression
@@ -224,9 +215,26 @@ solve(A)                                 #inverse of A
 factanal()
 princomp()
 
+# ANOVA & T-TEST
+aov(x~y,data=datafile)  			#where x and y can be matrices
+aov.ex1 = aov(DV~IV,data=data.ex1)  		#do the analysis of variance or
+aov.ex2 = aov(DV~IV1*IV21,data=data.ex2)        #do a two way analysis of variance
+print(model.tables(aov.ex1,"means"),digits=3)   #report the means and the number of subjects/cell
+boxplot(DV~IV,data=data.ex1)        		#graphical summary appears in graphics window
+t.test(x,g)
+pairwise.t.test(x,g)
+power.anova.test(groups = NULL, n = NULL, between.var = NULL,
+                 within.var = NULL, sig.level = 0.05, power = NULL)
+power.t.test(n = NULL, delta = NULL, sd = 1, sig.level = 0.05,
+             power = NULL, type = c("two.sample", "one.sample", "paired"),
+             alternative = c("two.sided", "one.sided"),strict = FALSE)  
+
+# FITTING LINEAR MODELS
 
 
-      GRAPHICS
+        
+	 GRAPHICS
+
 
 # Handling windows and saving files
 pdf("mygraph.pdf") 		#pdf file
